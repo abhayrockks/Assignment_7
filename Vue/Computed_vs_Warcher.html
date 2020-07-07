@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="demo1">Watch: {{ fullName }}</div>
+
+    <div id="demo2">Computed: {{ fullName }}</div>
+
+    <script>
+        var vm = new Vue({
+            el: '#demo1',
+            data: {
+                firstName: 'Abhay',
+                lastName: 'Mehta',
+                fullName: 'Abhay Mehta'
+            },
+            watch: {
+                firstName: function (val) {
+                    this.fullName = val + ' ' + this.lastName
+                },
+                lastName: function (val) {
+                    this.fullName = this.firstName + ' ' + val
+                }
+            }
+        })
+
+        var vm = new Vue({
+            el: '#demo2',
+            data: {
+                firstName: 'Mickey',
+                lastName: 'Mehta'
+            },
+            computed: {
+                fullName: function () {
+                    return this.firstName + ' ' + this.lastName
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

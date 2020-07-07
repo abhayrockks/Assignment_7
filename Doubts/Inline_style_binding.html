@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="bstyle">
+        <div v-bind:style="{ color: 'green', fontsize: 30px}">Hi</div>
+
+        <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">Hi</div>
+
+        <div v-bind:style="styleObject">Hi</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#bstyle",
+            data() {
+                return {
+                    activeColor: 'red',
+                    fontSize: 30,
+
+                    styleObject() {
+                        return {
+                            color: 'yellow',
+                            fontSize: '50px'
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

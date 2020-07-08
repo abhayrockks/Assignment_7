@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="conditional">
+        <div v-if="active">
+            Value is true
+        </div>
+        <div v-else>
+            Value is false
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#conditional",
+            data() {
+                return {
+                    active: false
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <p>My name is {{name}}</p>
+        <button @click="changeName()">Change my name!</button>
+    </div>
+
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                name: 'Abhay'
+            },
+            methods: {
+                changeName: function () {
+                    this.name = 'Rohit'
+                }
+            },
+            watch: {
+                name: function (newValue, oldValue) {
+                    console.log(newValue, oldValue)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

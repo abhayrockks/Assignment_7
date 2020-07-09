@@ -49,11 +49,11 @@
             </thead>
             <tbody>
                 <tr v-for="(item, index) in details" :key="index"
-                    :class="{'highlight': (item.id == selectedUser) && (checked == true)}">
+                    :class="{'highlight': (item.id == isChecked(item.id))}">
                     <td v-for="(column, indexColumn) in columns" :key="indexColumn" v-bind:title="item.column">
                         {{item[column]}}</td>
                     <td><button @click='deleteTableRow(index)'>Delete</button></td>
-                    <td><input type="checkbox" @click="selectRow(item.id)" v-model="checked" :value="item.id"></td>
+                    <td><input type="checkbox" v-model="checked" :value="item.id"></td>
                 </tr>
             </tbody>
         </table>
@@ -72,7 +72,7 @@
         new Vue({
             el: '#app',
             data: {
-                checked: false,
+                checked: [],
                 selectedUser: null,
                 newfname: '',
                 newlname: '',
@@ -99,7 +99,7 @@
                     }
                 ],
                 columns: ['fname', 'last_name', 'address'],
-                nextdataId: 4
+                nextdataId: 4,
             },
             methods: {
                 addNewDetails: function () {
@@ -114,8 +114,8 @@
                 deleteTableRow: function (idx) {
                     this.details.splice(idx, 1);
                 },
-                selectRow(user) {
-                    this.selectedUser = user;
+                isChecked(item) {
+                    return this.checked.find(el => el == item)
                 }
             }
         })

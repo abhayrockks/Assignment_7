@@ -29,13 +29,13 @@
         <h2>Customer Details</h2>
         <form v-on:submit.prevent="addNewDetails">
             <label for="fname">First Name</label>
-            <input v-model="newfname" id="fname" placeholder="Enter First Name">
+            <input v-model="fname" id="fname" placeholder="Enter First Name">
 
             <label for="lname">Last Name</label>
-            <input v-model="newlname" id="lname" placeholder="Enter Last Name">
+            <input v-model="lname" id="lname" placeholder="Enter Last Name">
 
             <label for="addr">Address</label>
-            <input v-model="newaddr" id="addr" placeholder="Enter Address">
+            <input v-model="addr" id="addr" placeholder="Enter Address">
             <button>Add</button>
         </form>
 
@@ -74,9 +74,9 @@
             data: {
                 checked: [],
                 selectedUser: null,
-                newfname: '',
-                newlname: '',
-                newaddr: '',
+                fname: '',
+                lname: '',
+                addr: '',
                 details: [
                     {
                         id: 1,
@@ -105,9 +105,9 @@
                 addNewDetails: function () {
                     this.details.push({
                         id: this.nextdataId++,
-                        fname: this.newfname,
-                        last_name: this.newlname,
-                        address: this.newaddr
+                        fname: this.fname,
+                        last_name: this.lname,
+                        address: this.addr
                     })
                     this.newdetails = ''
                 },

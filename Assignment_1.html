@@ -1,0 +1,125 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            border: solid 1px #ddd;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        .highlight {
+            background-color: rgb(230, 63, 22);
+        }
+    </style>
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <h2>Customer Details</h2>
+        <form v-on:submit.prevent="addNewDetails">
+            <label for="fname">First Name</label>
+            <input v-model="fname" id="fname" placeholder="Enter First Name">
+
+            <label for="lname">Last Name</label>
+            <input v-model="lname" id="lname" placeholder="Enter Last Name">
+
+            <label for="addr">Address</label>
+            <input v-model="addr" id="addr" placeholder="Enter Address">
+            <button>Add</button>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in details" :key="index"
+                    :class="{'highlight': (item.id == isChecked(item.id))}">
+                    <td v-for="(column, indexColumn) in columns" :key="indexColumn" v-bind:title="item.column">
+                        {{item[column]}}</td>
+                    <td><button @click='deleteTableRow(index)'>Delete</button></td>
+                    <td><input type="checkbox" v-model="checked" :value="item.id"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        Vue.component('detail-item', {
+            template: '\
+    <ul>\
+      {{ table}}\
+    </ul>\
+  ',
+            props: ['table']
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+                checked: [],
+                selectedUser: null,
+                fname: '',
+                lname: '',
+                addr: '',
+                details: [
+                    {
+                        id: 1,
+                        fname: 'Abhay',
+                        last_name: 'Mehta',
+                        address: 'Delhi'
+
+                    },
+                    {
+                        id: 2,
+                        fname: 'Siddharth',
+                        last_name: 'Rai',
+                        address: 'Noida'
+                    },
+                    {
+                        id: 3,
+                        fname: 'Kritika',
+                        last_name: 'Roy',
+                        address: 'Gurgaon'
+                    }
+                ],
+                columns: ['fname', 'last_name', 'address'],
+                nextdataId: 4,
+            },
+            methods: {
+                addNewDetails: function () {
+                    this.details.push({
+                        id: this.nextdataId++,
+                        fname: this.fname,
+                        last_name: this.lname,
+                        address: this.addr
+                    })
+                    this.newdetails = ''
+                },
+                deleteTableRow: function (idx) {
+                    this.details.splice(idx, 1);
+                },
+                isChecked(item) {
+                    return this.checked.find(el => el == item)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
